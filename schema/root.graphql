@@ -1,0 +1,40 @@
+"""
+An ISO-8601 encoded UTC date time string.
+"""
+scalar DateTime
+
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  Indicates if there are more pages to fetch.
+  """
+  hasNextPage: Boolean!
+  """
+  Indicates if there are any pages prior to the current page.
+  """
+  hasPreviousPage: Boolean!
+}
+
+
+type Query {
+  channels: [Channel!]!
+  channel(id: ID!): Channel!
+  message(id: ID!): Message!
+  user(id: ID!): User!
+}
+
+input NewMessage {
+  channelId: ID!
+  text: String!
+}
+
+input NewChannel {
+  displayName: String!
+}
+
+type Mutation {
+  createChannel(input: NewChannel!): Channel!
+  createMessage(input: NewMessage!): Message!
+}

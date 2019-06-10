@@ -1,0 +1,47 @@
+"""
+Specifies the sort order for messages.
+"""
+enum MessageSortKey {
+  CREATED_ASC
+  CREATED_DESC
+}
+
+type MessageConnection {
+  """
+  A list of edges.
+  """
+  edges: [MessageEdge!]!
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+type MessageEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+  """
+  The item at the end of the Edge.
+  """
+  node: Message!
+}
+
+type Message {
+  id: ID!
+  text: String!
+  createdBy: User!
+
+  """
+  The date and time (ISO 8601 format) when the message was created.
+  """
+  createdAt: DateTime!
+
+  """
+  The date and time (ISO 8601 format) when the message was last modified.
+  """
+  updatedAt: DateTime!
+
+  channel: Channel!
+}

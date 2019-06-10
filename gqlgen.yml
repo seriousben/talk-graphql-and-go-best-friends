@@ -1,0 +1,34 @@
+schema: schema/*.graphql
+
+exec:
+  filename: internal/graphql/graph/generated.go
+  package: graph
+
+model:
+  filename: internal/graphql/models/generated.go
+  package: models
+
+resolver:
+  filename: internal/graphql/resolver.go
+  type: Resolver
+  package: graphql
+
+models:
+  Message:
+    fields:
+      createdBy:
+        resolver: true
+  User:
+    fields:
+      createdBy:
+        resolver: true
+      messages:
+        resolver: true
+  Channel:
+    fields:
+      createdBy:
+        resolver: true
+      messages:
+        resolver: true
+      members:
+        resolver: true

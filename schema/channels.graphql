@@ -1,0 +1,57 @@
+
+"""
+Specifies the sort order for channel members.
+"""
+enum ChannelMemberSortKey {
+  JOINED_ASC
+  JOINED_DESC
+  NAME_ASC
+  NAME_DESC
+}
+
+type Channel
+{
+  id: ID!
+  displayName: String!
+  createdBy: User!
+
+  """
+  The date and time (ISO 8601 format) when the channel was created.
+  """
+  createdAt: DateTime!
+
+  """
+  The date and time (ISO 8601 format) when the channel was last modified.
+  """
+  updatedAt: DateTime!
+
+  messages(
+    """
+    Returns the elements that come after the specified cursor.
+    """
+    after: String
+    """
+    Returns up to the first n elements from the list.
+    """
+    first: Int
+    """
+    Sort the underlying list by the given key.
+    """
+    sortKey: MessageSortKey = CREATED_DESC
+  ): MessageConnection!
+
+  members(
+    """
+    Returns the elements that come after the specified cursor.
+    """
+    after: String
+    """
+    Returns up to the first n elements from the list.
+    """
+    first: Int
+    """
+    Sort the underlying list by the given key.
+    """
+    sortKey: ChannelMemberSortKey = NAME_ASC
+  ): UserConnection!
+}
