@@ -12,7 +12,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	"github.com/seriousben/simple-graphql-chat/internal/graphql/models"
+	"github.com/seriousben/simple-graphql-chat/internal/models"
 	"github.com/vektah/gqlparser"
 	"github.com/vektah/gqlparser/ast"
 )
@@ -731,7 +731,7 @@ func (ec *executionContext) field_Channel_members_args(ctx context.Context, rawA
 	args["first"] = arg1
 	var arg2 *models.ChannelMemberSortKey
 	if tmp, ok := rawArgs["sortKey"]; ok {
-		arg2, err = ec.unmarshalOChannelMemberSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannelMemberSortKey(ctx, tmp)
+		arg2, err = ec.unmarshalOChannelMemberSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannelMemberSortKey(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -761,7 +761,7 @@ func (ec *executionContext) field_Channel_messages_args(ctx context.Context, raw
 	args["first"] = arg1
 	var arg2 *models.MessageSortKey
 	if tmp, ok := rawArgs["sortKey"]; ok {
-		arg2, err = ec.unmarshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageSortKey(ctx, tmp)
+		arg2, err = ec.unmarshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageSortKey(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -775,7 +775,7 @@ func (ec *executionContext) field_Mutation_createChannel_args(ctx context.Contex
 	args := map[string]interface{}{}
 	var arg0 models.NewChannel
 	if tmp, ok := rawArgs["input"]; ok {
-		arg0, err = ec.unmarshalNNewChannel2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐNewChannel(ctx, tmp)
+		arg0, err = ec.unmarshalNNewChannel2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐNewChannel(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -789,7 +789,7 @@ func (ec *executionContext) field_Mutation_createMessage_args(ctx context.Contex
 	args := map[string]interface{}{}
 	var arg0 models.NewMessage
 	if tmp, ok := rawArgs["input"]; ok {
-		arg0, err = ec.unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐNewMessage(ctx, tmp)
+		arg0, err = ec.unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐNewMessage(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -875,7 +875,7 @@ func (ec *executionContext) field_User_messages_args(ctx context.Context, rawArg
 	args["first"] = arg1
 	var arg2 *models.MessageSortKey
 	if tmp, ok := rawArgs["sortKey"]; ok {
-		arg2, err = ec.unmarshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageSortKey(ctx, tmp)
+		arg2, err = ec.unmarshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageSortKey(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -994,7 +994,7 @@ func (ec *executionContext) _Channel_createdBy(ctx context.Context, field graphq
 	res := resTmp.(*models.User)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUser(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Channel_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Channel) graphql.Marshaler {
@@ -1082,7 +1082,7 @@ func (ec *executionContext) _Channel_messages(ctx context.Context, field graphql
 	res := resTmp.(*models.MessageConnection)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessageConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageConnection(ctx, field.Selections, res)
+	return ec.marshalNMessageConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageConnection(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Channel_members(ctx context.Context, field graphql.CollectedField, obj *models.Channel) graphql.Marshaler {
@@ -1116,7 +1116,7 @@ func (ec *executionContext) _Channel_members(ctx context.Context, field graphql.
 	res := resTmp.(*models.UserConnection)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUserConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserConnection(ctx, field.Selections, res)
+	return ec.marshalNUserConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserConnection(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Message_id(ctx context.Context, field graphql.CollectedField, obj *models.Message) graphql.Marshaler {
@@ -1197,7 +1197,7 @@ func (ec *executionContext) _Message_createdBy(ctx context.Context, field graphq
 	res := resTmp.(*models.User)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUser(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Message_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Message) graphql.Marshaler {
@@ -1278,7 +1278,7 @@ func (ec *executionContext) _Message_channel(ctx context.Context, field graphql.
 	res := resTmp.(*models.Channel)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx, field.Selections, res)
+	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _MessageConnection_edges(ctx context.Context, field graphql.CollectedField, obj *models.MessageConnection) graphql.Marshaler {
@@ -1305,7 +1305,7 @@ func (ec *executionContext) _MessageConnection_edges(ctx context.Context, field 
 	res := resTmp.([]*models.MessageEdge)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessageEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageEdge(ctx, field.Selections, res)
+	return ec.marshalNMessageEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageEdge(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _MessageConnection_pageInfo(ctx context.Context, field graphql.CollectedField, obj *models.MessageConnection) graphql.Marshaler {
@@ -1332,7 +1332,7 @@ func (ec *executionContext) _MessageConnection_pageInfo(ctx context.Context, fie
 	res := resTmp.(*models.PageInfo)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐPageInfo(ctx, field.Selections, res)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐPageInfo(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _MessageEdge_cursor(ctx context.Context, field graphql.CollectedField, obj *models.MessageEdge) graphql.Marshaler {
@@ -1386,7 +1386,7 @@ func (ec *executionContext) _MessageEdge_node(ctx context.Context, field graphql
 	res := resTmp.(*models.Message)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessage(ctx, field.Selections, res)
+	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessage(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Mutation_createChannel(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -1420,7 +1420,7 @@ func (ec *executionContext) _Mutation_createChannel(ctx context.Context, field g
 	res := resTmp.(*models.Channel)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx, field.Selections, res)
+	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Mutation_createMessage(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -1454,7 +1454,7 @@ func (ec *executionContext) _Mutation_createMessage(ctx context.Context, field g
 	res := resTmp.(*models.Message)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessage(ctx, field.Selections, res)
+	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessage(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _PageInfo_hasNextPage(ctx context.Context, field graphql.CollectedField, obj *models.PageInfo) graphql.Marshaler {
@@ -1535,7 +1535,7 @@ func (ec *executionContext) _Query_channels(ctx context.Context, field graphql.C
 	res := resTmp.([]*models.Channel)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx, field.Selections, res)
+	return ec.marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_channel(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -1569,7 +1569,7 @@ func (ec *executionContext) _Query_channel(ctx context.Context, field graphql.Co
 	res := resTmp.(*models.Channel)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx, field.Selections, res)
+	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_message(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -1603,7 +1603,7 @@ func (ec *executionContext) _Query_message(ctx context.Context, field graphql.Co
 	res := resTmp.(*models.Message)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessage(ctx, field.Selections, res)
+	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessage(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_user(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -1637,7 +1637,7 @@ func (ec *executionContext) _Query_user(ctx context.Context, field graphql.Colle
 	res := resTmp.(*models.User)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUser(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -1834,7 +1834,7 @@ func (ec *executionContext) _User_messages(ctx context.Context, field graphql.Co
 	res := resTmp.(*models.MessageConnection)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessageConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageConnection(ctx, field.Selections, res)
+	return ec.marshalNMessageConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageConnection(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _UserConnection_edges(ctx context.Context, field graphql.CollectedField, obj *models.UserConnection) graphql.Marshaler {
@@ -1861,7 +1861,7 @@ func (ec *executionContext) _UserConnection_edges(ctx context.Context, field gra
 	res := resTmp.([]*models.UserEdge)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUserEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserEdge(ctx, field.Selections, res)
+	return ec.marshalNUserEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserEdge(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _UserConnection_pageInfo(ctx context.Context, field graphql.CollectedField, obj *models.UserConnection) graphql.Marshaler {
@@ -1888,7 +1888,7 @@ func (ec *executionContext) _UserConnection_pageInfo(ctx context.Context, field 
 	res := resTmp.(*models.PageInfo)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐPageInfo(ctx, field.Selections, res)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐPageInfo(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _UserEdge_cursor(ctx context.Context, field graphql.CollectedField, obj *models.UserEdge) graphql.Marshaler {
@@ -1942,7 +1942,7 @@ func (ec *executionContext) _UserEdge_node(ctx context.Context, field graphql.Co
 	res := resTmp.(*models.User)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUser(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Directive_name(ctx context.Context, field graphql.CollectedField, obj *introspection.Directive) graphql.Marshaler {
@@ -3568,11 +3568,11 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
-func (ec *executionContext) marshalNChannel2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx context.Context, sel ast.SelectionSet, v models.Channel) graphql.Marshaler {
+func (ec *executionContext) marshalNChannel2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx context.Context, sel ast.SelectionSet, v models.Channel) graphql.Marshaler {
 	return ec._Channel(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx context.Context, sel ast.SelectionSet, v []*models.Channel) graphql.Marshaler {
+func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx context.Context, sel ast.SelectionSet, v []*models.Channel) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -3596,7 +3596,7 @@ func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsi
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx, sel, v[i])
+			ret[i] = ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3609,7 +3609,7 @@ func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsi
 	return ret
 }
 
-func (ec *executionContext) marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannel(ctx context.Context, sel ast.SelectionSet, v *models.Channel) graphql.Marshaler {
+func (ec *executionContext) marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannel(ctx context.Context, sel ast.SelectionSet, v *models.Channel) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3647,11 +3647,11 @@ func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.Selec
 	return res
 }
 
-func (ec *executionContext) marshalNMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessage(ctx context.Context, sel ast.SelectionSet, v models.Message) graphql.Marshaler {
+func (ec *executionContext) marshalNMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessage(ctx context.Context, sel ast.SelectionSet, v models.Message) graphql.Marshaler {
 	return ec._Message(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessage(ctx context.Context, sel ast.SelectionSet, v *models.Message) graphql.Marshaler {
+func (ec *executionContext) marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessage(ctx context.Context, sel ast.SelectionSet, v *models.Message) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3661,11 +3661,11 @@ func (ec *executionContext) marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpl
 	return ec._Message(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNMessageConnection2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageConnection(ctx context.Context, sel ast.SelectionSet, v models.MessageConnection) graphql.Marshaler {
+func (ec *executionContext) marshalNMessageConnection2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageConnection(ctx context.Context, sel ast.SelectionSet, v models.MessageConnection) graphql.Marshaler {
 	return ec._MessageConnection(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNMessageConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageConnection(ctx context.Context, sel ast.SelectionSet, v *models.MessageConnection) graphql.Marshaler {
+func (ec *executionContext) marshalNMessageConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageConnection(ctx context.Context, sel ast.SelectionSet, v *models.MessageConnection) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3675,11 +3675,11 @@ func (ec *executionContext) marshalNMessageConnection2ᚖgithubᚗcomᚋseriousb
 	return ec._MessageConnection(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNMessageEdge2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageEdge(ctx context.Context, sel ast.SelectionSet, v models.MessageEdge) graphql.Marshaler {
+func (ec *executionContext) marshalNMessageEdge2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageEdge(ctx context.Context, sel ast.SelectionSet, v models.MessageEdge) graphql.Marshaler {
 	return ec._MessageEdge(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNMessageEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageEdge(ctx context.Context, sel ast.SelectionSet, v []*models.MessageEdge) graphql.Marshaler {
+func (ec *executionContext) marshalNMessageEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageEdge(ctx context.Context, sel ast.SelectionSet, v []*models.MessageEdge) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -3703,7 +3703,7 @@ func (ec *executionContext) marshalNMessageEdge2ᚕᚖgithubᚗcomᚋseriousben�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNMessageEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageEdge(ctx, sel, v[i])
+			ret[i] = ec.marshalNMessageEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageEdge(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3716,7 +3716,7 @@ func (ec *executionContext) marshalNMessageEdge2ᚕᚖgithubᚗcomᚋseriousben�
 	return ret
 }
 
-func (ec *executionContext) marshalNMessageEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageEdge(ctx context.Context, sel ast.SelectionSet, v *models.MessageEdge) graphql.Marshaler {
+func (ec *executionContext) marshalNMessageEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageEdge(ctx context.Context, sel ast.SelectionSet, v *models.MessageEdge) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3726,19 +3726,19 @@ func (ec *executionContext) marshalNMessageEdge2ᚖgithubᚗcomᚋseriousbenᚋs
 	return ec._MessageEdge(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNNewChannel2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐNewChannel(ctx context.Context, v interface{}) (models.NewChannel, error) {
+func (ec *executionContext) unmarshalNNewChannel2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐNewChannel(ctx context.Context, v interface{}) (models.NewChannel, error) {
 	return ec.unmarshalInputNewChannel(ctx, v)
 }
 
-func (ec *executionContext) unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐNewMessage(ctx context.Context, v interface{}) (models.NewMessage, error) {
+func (ec *executionContext) unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐNewMessage(ctx context.Context, v interface{}) (models.NewMessage, error) {
 	return ec.unmarshalInputNewMessage(ctx, v)
 }
 
-func (ec *executionContext) marshalNPageInfo2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v models.PageInfo) graphql.Marshaler {
+func (ec *executionContext) marshalNPageInfo2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v models.PageInfo) graphql.Marshaler {
 	return ec._PageInfo(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNPageInfo2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v *models.PageInfo) graphql.Marshaler {
+func (ec *executionContext) marshalNPageInfo2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v *models.PageInfo) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3762,11 +3762,11 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNUser2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUser(ctx context.Context, sel ast.SelectionSet, v models.User) graphql.Marshaler {
+func (ec *executionContext) marshalNUser2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUser(ctx context.Context, sel ast.SelectionSet, v models.User) graphql.Marshaler {
 	return ec._User(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUser(ctx context.Context, sel ast.SelectionSet, v *models.User) graphql.Marshaler {
+func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUser(ctx context.Context, sel ast.SelectionSet, v *models.User) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3776,11 +3776,11 @@ func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimple�
 	return ec._User(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNUserConnection2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserConnection(ctx context.Context, sel ast.SelectionSet, v models.UserConnection) graphql.Marshaler {
+func (ec *executionContext) marshalNUserConnection2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserConnection(ctx context.Context, sel ast.SelectionSet, v models.UserConnection) graphql.Marshaler {
 	return ec._UserConnection(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNUserConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserConnection(ctx context.Context, sel ast.SelectionSet, v *models.UserConnection) graphql.Marshaler {
+func (ec *executionContext) marshalNUserConnection2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserConnection(ctx context.Context, sel ast.SelectionSet, v *models.UserConnection) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3790,11 +3790,11 @@ func (ec *executionContext) marshalNUserConnection2ᚖgithubᚗcomᚋseriousben�
 	return ec._UserConnection(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNUserEdge2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserEdge(ctx context.Context, sel ast.SelectionSet, v models.UserEdge) graphql.Marshaler {
+func (ec *executionContext) marshalNUserEdge2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserEdge(ctx context.Context, sel ast.SelectionSet, v models.UserEdge) graphql.Marshaler {
 	return ec._UserEdge(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNUserEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserEdge(ctx context.Context, sel ast.SelectionSet, v []*models.UserEdge) graphql.Marshaler {
+func (ec *executionContext) marshalNUserEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserEdge(ctx context.Context, sel ast.SelectionSet, v []*models.UserEdge) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -3818,7 +3818,7 @@ func (ec *executionContext) marshalNUserEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋs
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNUserEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserEdge(ctx, sel, v[i])
+			ret[i] = ec.marshalNUserEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserEdge(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3831,7 +3831,7 @@ func (ec *executionContext) marshalNUserEdge2ᚕᚖgithubᚗcomᚋseriousbenᚋs
 	return ret
 }
 
-func (ec *executionContext) marshalNUserEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐUserEdge(ctx context.Context, sel ast.SelectionSet, v *models.UserEdge) graphql.Marshaler {
+func (ec *executionContext) marshalNUserEdge2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐUserEdge(ctx context.Context, sel ast.SelectionSet, v *models.UserEdge) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -4090,24 +4090,24 @@ func (ec *executionContext) marshalOBoolean2ᚖbool(ctx context.Context, sel ast
 	return ec.marshalOBoolean2bool(ctx, sel, *v)
 }
 
-func (ec *executionContext) unmarshalOChannelMemberSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannelMemberSortKey(ctx context.Context, v interface{}) (models.ChannelMemberSortKey, error) {
+func (ec *executionContext) unmarshalOChannelMemberSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannelMemberSortKey(ctx context.Context, v interface{}) (models.ChannelMemberSortKey, error) {
 	var res models.ChannelMemberSortKey
 	return res, res.UnmarshalGQL(v)
 }
 
-func (ec *executionContext) marshalOChannelMemberSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannelMemberSortKey(ctx context.Context, sel ast.SelectionSet, v models.ChannelMemberSortKey) graphql.Marshaler {
+func (ec *executionContext) marshalOChannelMemberSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannelMemberSortKey(ctx context.Context, sel ast.SelectionSet, v models.ChannelMemberSortKey) graphql.Marshaler {
 	return v
 }
 
-func (ec *executionContext) unmarshalOChannelMemberSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannelMemberSortKey(ctx context.Context, v interface{}) (*models.ChannelMemberSortKey, error) {
+func (ec *executionContext) unmarshalOChannelMemberSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannelMemberSortKey(ctx context.Context, v interface{}) (*models.ChannelMemberSortKey, error) {
 	if v == nil {
 		return nil, nil
 	}
-	res, err := ec.unmarshalOChannelMemberSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannelMemberSortKey(ctx, v)
+	res, err := ec.unmarshalOChannelMemberSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannelMemberSortKey(ctx, v)
 	return &res, err
 }
 
-func (ec *executionContext) marshalOChannelMemberSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐChannelMemberSortKey(ctx context.Context, sel ast.SelectionSet, v *models.ChannelMemberSortKey) graphql.Marshaler {
+func (ec *executionContext) marshalOChannelMemberSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐChannelMemberSortKey(ctx context.Context, sel ast.SelectionSet, v *models.ChannelMemberSortKey) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -4137,24 +4137,24 @@ func (ec *executionContext) marshalOInt2ᚖint(ctx context.Context, sel ast.Sele
 	return ec.marshalOInt2int(ctx, sel, *v)
 }
 
-func (ec *executionContext) unmarshalOMessageSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageSortKey(ctx context.Context, v interface{}) (models.MessageSortKey, error) {
+func (ec *executionContext) unmarshalOMessageSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageSortKey(ctx context.Context, v interface{}) (models.MessageSortKey, error) {
 	var res models.MessageSortKey
 	return res, res.UnmarshalGQL(v)
 }
 
-func (ec *executionContext) marshalOMessageSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageSortKey(ctx context.Context, sel ast.SelectionSet, v models.MessageSortKey) graphql.Marshaler {
+func (ec *executionContext) marshalOMessageSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageSortKey(ctx context.Context, sel ast.SelectionSet, v models.MessageSortKey) graphql.Marshaler {
 	return v
 }
 
-func (ec *executionContext) unmarshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageSortKey(ctx context.Context, v interface{}) (*models.MessageSortKey, error) {
+func (ec *executionContext) unmarshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageSortKey(ctx context.Context, v interface{}) (*models.MessageSortKey, error) {
 	if v == nil {
 		return nil, nil
 	}
-	res, err := ec.unmarshalOMessageSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageSortKey(ctx, v)
+	res, err := ec.unmarshalOMessageSortKey2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageSortKey(ctx, v)
 	return &res, err
 }
 
-func (ec *executionContext) marshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋgraphqlᚋmodelsᚐMessageSortKey(ctx context.Context, sel ast.SelectionSet, v *models.MessageSortKey) graphql.Marshaler {
+func (ec *executionContext) marshalOMessageSortKey2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋinternalᚋmodelsᚐMessageSortKey(ctx context.Context, sel ast.SelectionSet, v *models.MessageSortKey) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}

@@ -1,17 +1,17 @@
 schema: schema/*.graphql
 
 exec:
-  filename: internal/graphql/graph/generated.go
+  filename: internal/graph/generated.go
   package: graph
 
 model:
-  filename: internal/graphql/models/generated.go
+  filename: internal/models/generated.go
   package: models
 
 resolver:
-  filename: internal/graphql/resolver.go
-  type: Resolver
-  package: graphql
+  filename: internal/resolvers/root_generated.go
+  type: RootResolver
+  package: resolvers
 
 models:
   Message:
