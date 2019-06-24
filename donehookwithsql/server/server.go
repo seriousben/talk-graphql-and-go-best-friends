@@ -18,13 +18,13 @@ func main() {
 		port = defaultPort
 	}
 
-	db, err := db.Dial(dbURL)
+	db, err := db.DialWithEnv()
 	if err != nil {
 		log.Fatalf("Error dialing database: %#v", err)
 	}
 
 	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
-	http.Handle("/query", handler.GraphQL(donehookwithsql.NewExecutableSchema(donehookwithsql.Config{Resolvers: &donehookwithsql.Resolver{db: db}})))
+	http.Handle("/query", handler.GraphQL(donehookwithsql.NewExecutableSchema(donehookwithsql.Config{Resolvers: &donehookwithsql.Resolver{DB: db}})))
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

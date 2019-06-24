@@ -8,7 +8,7 @@ import (
 )
 
 type Resolver struct {
-	db *db.DB
+	DB *db.DB
 }
 
 func (r *Resolver) Mutation() MutationResolver {
@@ -27,14 +27,14 @@ func (r *mutationResolver) CreateMessage(ctx context.Context, input NewMessage) 
 type queryResolver struct{ *Resolver }
 
 func (r *queryResolver) Channels(ctx context.Context) ([]*Channel, error) {
-	cs, err := r.db.ListChannels(ctx)
+	cs, err := r.DB.ListChannels(ctx)
 	if err != nil {
 		return nil, err
 	}
 
 	gcs := make([]*Channel, 0, len(cs))
 	for _, c := range cs {
-		gcs = append(gcs, &donehookwithsql.Channel{
+		gcs = append(gcs, &Channel{
 			ID:   strconv.Itoa(c.ID),
 			Name: c.Name,
 		})

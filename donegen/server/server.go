@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/99designs/gqlgen/handler"
-	"github.com/seriousben/simple-graphql-chat/donegen"
+	"github.com/seriousben/talk-graphql/donegen"
 )
 
 const defaultPort = "8080"

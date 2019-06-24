@@ -3,7 +3,7 @@ package resolvers
 import (
 	"context"
 
-	"github.com/seriousben/simple-graphql-chat/internal/models"
+	"github.com/seriousben/talk-graphql/internal/models"
 )
 
 type MessageResolver struct{ *RootResolver }

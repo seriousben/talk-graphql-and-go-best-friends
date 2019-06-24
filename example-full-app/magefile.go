@@ -7,7 +7,7 @@ import (
 	"github.com/99designs/gqlgen/codegen/config"
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
-	"github.com/seriousben/simple-graphql-chat/magetools/gqlgenplugins/resolvergen"
+	"github.com/seriousben/talk-graphql/magetools/gqlgenplugins/resolvergen"
 )
 
 var goCmd = sh.RunCmd(mg.GoCmd())
