@@ -23,6 +23,11 @@ func main() {
 		log.Fatalf("Error dialing database: %#v", err)
 	}
 
+	err = db.AddFixtures()
+	if err != nil {
+		log.Fatalf("Error adding fixtures: %#v", err)
+	}
+
 	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
 	http.Handle("/query", handler.GraphQL(donehookwithsql.NewExecutableSchema(donehookwithsql.Config{Resolvers: &donehookwithsql.Resolver{DB: db}})))
 
