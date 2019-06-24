@@ -12,7 +12,15 @@ func (r *ChannelResolver) CreatedBy(ctx context.Context, obj *models.Channel) (*
 	panic("not implemented")
 }
 func (r *ChannelResolver) Messages(ctx context.Context, obj *models.Channel, after *string, first *int, sortKey *models.MessageSortKey) (*models.MessageConnection, error) {
-	panic("not implemented")
+	return &models.MessageConnection{
+		Edges: []*models.MessageEdge{
+			{
+				Node: &models.Message{
+					ID: "2",
+				},
+			},
+		},
+	}, nil
 }
 func (r *ChannelResolver) Members(ctx context.Context, obj *models.Channel, after *string, first *int, sortKey *models.ChannelMemberSortKey) (*models.UserConnection, error) {
 	panic("not implemented")

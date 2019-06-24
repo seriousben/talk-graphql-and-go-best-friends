@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="356px" preserveAspectRatio="none" style="width:276px;height:356px;" version="1.1" viewBox="0 0 276 356" width="276px" zoomAndPan="magnify"><defs><filter height="300%" id="fpfuzpuq1r2sm" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fpfuzpuq1r2sm)" height="49.25" style="stroke: #000000; stroke-width: 1.5;" width="43" x="35.5971" y="296"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="29" x="42.5971" y="309.1387">User</text><line style="stroke: #000000; stroke-width: 1.5;" x1="36.5971" x2="77.5971" y1="313.9688" y2="313.9688"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="8" x="41.5971" y="327.251">id</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="28" x="41.5971" y="338.8916">name</text><rect fill="#FFFFFF" filter="url(#fpfuzpuq1r2sm)" height="72.5313" style="stroke: #000000; stroke-width: 1.5;" width="94" x="144.097" y="146"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="56" x="163.097" y="159.1387">Message</text><line style="stroke: #000000; stroke-width: 1.5;" x1="145.097" x2="237.097" y1="163.9688" y2="163.9688"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="8" x="150.097" y="177.251">id</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="20" x="150.097" y="188.8916">text</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="46" x="150.097" y="200.5322">channelId</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="82" x="150.097" y="212.1729">createdByUserId</text><rect fill="#FFFFFF" filter="url(#fpfuzpuq1r2sm)" height="60.8906" style="stroke: #000000; stroke-width: 1.5;" width="94" x="10.0971" y="8"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="51" x="31.5971" y="21.1387">Channel</text><line style="stroke: #000000; stroke-width: 1.5;" x1="11.0971" x2="103.0971" y1="25.9688" y2="25.9688"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="8" x="16.0971" y="39.251">id</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="28" x="16.0971" y="50.8916">name</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="82" x="16.0971" y="62.5322">createdByUserId</text><!--link Channel to Message--><path d="M85.1879,69.268 C105.2209,90.497 132.356,119.252 154.144,142.341 " fill="none" id="Channel-Message" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="157.593,145.996,154.3246,136.7053,154.1611,142.3598,148.5066,142.1963,157.593,145.996" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="135" x="129.097" y="112.0669">Has many messages</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="143.7704" y="135.0051">*</text><!--link Channel to User--><path d="M40.3735,69.174 C29.6515,89.96 16.7241,118.782 11.0971,146 C4.5287,177.773 4.1871,187.3 11.0971,219 C16.6731,244.58 29.3716,271.4403 40.0168,290.9504 " fill="none" id="Channel-User" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="42.6734,295.747,41.8122,285.9359,40.251,291.373,34.8138,289.8117,42.6734,295.747" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="114" x="12.0971" y="187.0669">Created by a user</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="30.1826" y="284.9379">1</text><!--link Message to User--><path d="M155.89,219.232 C132.727,242.742 102.9632,272.9494 82.1858,294.0369 " fill="none" id="Message-User" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="78.673,297.6021,87.8388,293.9983,82.1822,294.0404,82.1401,288.3837,78.673,297.6021" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="118" x="125.097" y="262.0669">Created by  a user</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="142.4792" y="238.6746">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="86.5056" y="285.3417">1</text><!--
+@startuml
+skinparam object {
+	BackgroundColor white
+	ArrowColor Black
+	BorderColor Black
+}
+skinparam stereotypeCBackgroundColor LightGrey
+
+object User
+object Message
+object Channel
+
+Channel - -> "*" Message: Has many messages
+Channel - -> "1" User: Created by a user
+Message "*" - -> "1" User: Created by  a user
+
+User : id
+User : name
+
+Channel : id
+Channel : name
+Channel : createdByUserId
+
+Message : id
+Message : text
+Message : channelId
+Message : createdByUserId
+@enduml
+
+PlantUML version 1.2019.07beta1(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.7.0_25-b15
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

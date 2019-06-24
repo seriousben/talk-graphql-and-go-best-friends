@@ -9,9 +9,9 @@ import (
 )
 
 type Channel struct {
-	ID          string `json:"id"`
-	DisplayName string `json:"displayName"`
-	CreatedBy   *User  `json:"createdBy"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	CreatedBy *User  `json:"createdBy"`
 	// The date and time (ISO 8601 format) when the channel was created.
 	CreatedAt string `json:"createdAt"`
 	// The date and time (ISO 8601 format) when the channel was last modified.

@@ -1,10 +1,13 @@
 package resolvers
 
 import (
+	"github.com/seriousben/simple-graphql-chat/internal/db"
 	"github.com/seriousben/simple-graphql-chat/internal/graph"
 )
 
-type RootResolver struct{}
+type RootResolver struct {
+	DB *db.DB
+}
 
 func (r *RootResolver) Channel() graph.ChannelResolver {
 	return &ChannelResolver{r}

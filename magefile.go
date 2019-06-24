@@ -11,7 +11,14 @@ import (
 )
 
 var goCmd = sh.RunCmd(mg.GoCmd())
+var docker = sh.RunCmd("docker")
 
+func RunDev() error {
+	return goCmd("run", "./cmd/server")
+}
+func BuildDocker() error {
+	return docker("build", ".")
+}
 func GoVersion() error {
 	return goCmd("env", "GOPATH")
 }
