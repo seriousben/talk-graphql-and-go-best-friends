@@ -6,13 +6,13 @@ import (
 	"os"
 
 	"github.com/99designs/gqlgen/handler"
-	"github.com/seriousben/simple-graphql-chat/internal/db"
-	"github.com/seriousben/simple-graphql-chat/internal/graph"
-	"github.com/seriousben/simple-graphql-chat/internal/resolvers"
+	"github.com/seriousben/talk-graphql/internal/db"
+	"github.com/seriousben/talk-graphql/internal/graph"
+	"github.com/seriousben/talk-graphql/internal/resolvers"
 )
 
 const defaultPort = "8080"
-const defaultDatabaseURL = "postgres://simple-graphql-chat:pass@localhost:5432/simple-graphql-chat?sslmode=disable"
+const defaultDatabaseURL = "postgres://talk-graphql:pass@localhost:5432/talk-graphql?sslmode=disable"
 
 func main() {
 	dbURL := os.Getenv("DATABASE_URL")

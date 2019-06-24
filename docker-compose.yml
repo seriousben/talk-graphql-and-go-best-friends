@@ -7,7 +7,7 @@ services:
   pg:
     image: postgres:11-alpine
     environment:
-      POSTGRES_USER: simple-graphql-chat
+      POSTGRES_USER: talk-graphql
       POSTGRES_PASSWORD: pass
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:

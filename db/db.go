@@ -11,7 +11,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-const defaultDatabaseURL = "postgres://simple-graphql-chat:pass@localhost:5432/simple-graphql-chat?sslmode=disable"
+const defaultDatabaseURL = "postgres://talk-graphql:pass@localhost:5432/talk-graphql?sslmode=disable"
 
 var ddlStatements = []string{
 	"DROP TABLE IF EXISTS message;",

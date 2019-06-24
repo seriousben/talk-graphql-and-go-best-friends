@@ -1,4 +1,4 @@
-module github.com/seriousben/simple-graphql-chat/donegen
+module github.com/seriousben/talk-graphql/donegen
 
 go 1.12
 

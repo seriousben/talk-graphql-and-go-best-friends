@@ -1,8 +1,8 @@
 package resolvers
 
 import (
-	"github.com/seriousben/simple-graphql-chat/internal/db"
-	"github.com/seriousben/simple-graphql-chat/internal/graph"
+	"github.com/seriousben/talk-graphql/internal/db"
+	"github.com/seriousben/talk-graphql/internal/graph"
 )
 
 type RootResolver struct {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/seriousben/simple-graphql-chat/internal/models"
+	"github.com/seriousben/talk-graphql/internal/models"
 )
 
 type QueryResolver struct{ *RootResolver }

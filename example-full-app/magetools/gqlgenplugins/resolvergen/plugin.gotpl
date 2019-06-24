@@ -12,7 +12,7 @@
 {{ reserveImport "github.com/vektah/gqlparser/ast" }}
 {{ reserveImport "github.com/99designs/gqlgen/graphql" }}
 {{ reserveImport "github.com/99designs/gqlgen/graphql/introspection" }}
-{{ reserveImport "github.com/seriousben/simple-graphql-chat/internal/db" }}
+{{ reserveImport "github.com/seriousben/talk-graphql/internal/db" }}
 
 type {{.ResolverType}} struct {
 	DB *db.DB
