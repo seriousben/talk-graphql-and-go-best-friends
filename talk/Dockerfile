@@ -10,8 +10,4 @@ RUN apk --update add curl && \
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY *.html slides/
 COPY *.js slides/
-COPY *.svg slides/
-COPY *.jpg slides/
-COPY *.mp4 slides/
-COPY *.gif slides/
-# COPY *.png slides
+COPY media slides/media
