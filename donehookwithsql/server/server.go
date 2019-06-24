@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/99designs/gqlgen/handler"
-	"github.com/seriousben/simple-graphql-chat/db"
-	"github.com/seriousben/simple-graphql-chat/donehookwithsql"
+	"github.com/seriousben/talk-graphql/db"
+	"github.com/seriousben/talk-graphql/donehookwithsql"
 )
 
 const defaultPort = "8080"
