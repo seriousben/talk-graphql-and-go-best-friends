@@ -20,18 +20,18 @@ var ddlStatements = []string{
 	`
 CREATE TABLE IF NOT EXISTS user_account (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT NOT NULL
 );`, `
 CREATE TABLE IF NOT EXISTS channel (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
-  created_by_user_id INTEGER REFERENCES user_account(id),
+  created_by_user_id INTEGER REFERENCES user_account(id)
 );`, `
 CREATE TABLE IF NOT EXISTS message (
   id SERIAL PRIMARY KEY,
   text_content TEXT NOT NULL,
   created_by_user_id INTEGER REFERENCES user_account(id),
-  channel_id INTEGER REFERENCES channel(id),
+  channel_id INTEGER REFERENCES channel(id)
 );`,
 }
 
@@ -40,16 +40,15 @@ type DB struct {
 }
 
 func Dial(connURL string) (*DB, error) {
-	fmt.Println(connURL)
 	c, err := sqlx.Connect("postgres", connURL)
 	if err != nil {
 		return nil, err
 	}
 
-	for _, s := range ddlStatements {
+	for i, s := range ddlStatements {
 		_, err := c.Exec(s)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error during ddl exec (%d): %v", i, err)
 		}
 	}
 

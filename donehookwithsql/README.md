@@ -1,12 +1,13 @@
 
 * `export GO111MODULE=on`
-* `go mod init`
-* `go run github.com/99designs/gqlgen init`
-* `vi schema.gql`
+* `vi server/server.go`
+* `vi resolver.go`
 * ```gql
 {
   channels{
     id
+    name
+    createdBy { id, name }
   }
 }
 ```
