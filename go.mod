@@ -1,3 +1,3 @@
-module github.com/seriousben/simple-graphql-chat
+module github.com/seriousben/talk-graphql
 
 go 1.12
