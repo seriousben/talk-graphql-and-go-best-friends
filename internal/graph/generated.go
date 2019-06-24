@@ -47,13 +47,13 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Channel struct {
-		CreatedAt   func(childComplexity int) int
-		CreatedBy   func(childComplexity int) int
-		DisplayName func(childComplexity int) int
-		ID          func(childComplexity int) int
-		Members     func(childComplexity int, after *string, first *int, sortKey *models.ChannelMemberSortKey) int
-		Messages    func(childComplexity int, after *string, first *int, sortKey *models.MessageSortKey) int
-		UpdatedAt   func(childComplexity int) int
+		CreatedAt func(childComplexity int) int
+		CreatedBy func(childComplexity int) int
+		ID        func(childComplexity int) int
+		Members   func(childComplexity int, after *string, first *int, sortKey *models.ChannelMemberSortKey) int
+		Messages  func(childComplexity int, after *string, first *int, sortKey *models.MessageSortKey) int
+		Name      func(childComplexity int) int
+		UpdatedAt func(childComplexity int) int
 	}
 
 	Message struct {
@@ -163,13 +163,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Channel.CreatedBy(childComplexity), true
 
-	case "Channel.displayName":
-		if e.complexity.Channel.DisplayName == nil {
-			break
-		}
-
-		return e.complexity.Channel.DisplayName(childComplexity), true
-
 	case "Channel.id":
 		if e.complexity.Channel.ID == nil {
 			break
@@ -200,6 +193,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Channel.Messages(childComplexity, args["after"].(*string), args["first"].(*int), args["sortKey"].(*models.MessageSortKey)), true
+
+	case "Channel.name":
+		if e.complexity.Channel.Name == nil {
+			break
+		}
+
+		return e.complexity.Channel.Name(childComplexity), true
 
 	case "Channel.updatedAt":
 		if e.complexity.Channel.UpdatedAt == nil {
@@ -518,7 +518,7 @@ enum ChannelMemberSortKey {
 type Channel
 {
   id: ID!
-  displayName: String!
+  name: String!
   createdBy: User!
 
   """
@@ -943,7 +943,7 @@ func (ec *executionContext) _Channel_id(ctx context.Context, field graphql.Colle
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Channel_displayName(ctx context.Context, field graphql.CollectedField, obj *models.Channel) graphql.Marshaler {
+func (ec *executionContext) _Channel_name(ctx context.Context, field graphql.CollectedField, obj *models.Channel) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
 	rctx := &graphql.ResolverContext{
@@ -956,7 +956,7 @@ func (ec *executionContext) _Channel_displayName(ctx context.Context, field grap
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.DisplayName, nil
+		return obj.Name, nil
 	})
 	if resTmp == nil {
 		if !ec.HasError(rctx) {
@@ -2842,8 +2842,8 @@ func (ec *executionContext) _Channel(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&invalids, 1)
 			}
-		case "displayName":
-			out.Values[i] = ec._Channel_displayName(ctx, field, obj)
+		case "name":
+			out.Values[i] = ec._Channel_name(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&invalids, 1)
 			}

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta2 name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>GraphQL and Go, Best Friends?</title>
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi) ? "css/print/pdf.css" : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+
+    <style>
+     .reveal {
+       color: lightgrey;
+     }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        text-transform: none;
+      }
+
+     .todo {
+       color: yellow;
+     }
+
+     .reveal img.svg {
+       background-color: white;
+       fill: white;
+     }
+
+     .reveal img.transparent-img {
+       background: none;
+       border: none;
+       box-shadow: none;
+     }
+
+     .reveal blockquote {
+       border-left: solid;
+     }
+
+     .reveal code.small {
+       font-size: 0.8em;
+     }
+
+     .reveal code {
+       background: #272822;
+     }
+
+     .box {
+       border: solid 1px green;
+     }
+
+     strong {
+       color: white;
+     }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-video="bhumie-best-friend.mp4" data-background-video-loop="true" data-background-size="contain" data-background-opacity="0.5" data-background-video-muted="true" style="margin-top:100px;">
+          <h1>GraphQL and Go</h1>
+          <h2>Best Friends?</h2>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## About Me!
+
+            * I have a big dog! 🐶
+            * Java, JavaScript and now Go Developer
+            * I have seen SOAP, EJB, RMI, Corba, REST, gRPC, Websocket and GraphQL APIs...😅
+            * I work at Manifold! Please take some stickers
+            * First time talking about GraphQL
+          </script>
+        </section>
+
+        <section data-markdown data-background-iframe="https://manifold.co/" data-background-opacity="0.15">
+          <script type="text/template">
+            <img width="500px" class="transparent-img" src="manifold.svg" />
+
+            Javascript (Frontend) - Remote
+
+            Go (Backend) - Remote
+
+            [manifold.co/careers](https://manifold.co/careers)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## What is this talk about?
+            <ul>
+              <li class="fragment">Introducing GraphQL</li>
+              <li class="fragment">Building a GraphQL API in go</li>
+              <li class="fragment">Shaking some preconceptions<br/><strong>You don't have to be RESTful</strong> 🥳</li>
+            </ul>
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Our Example Application
+
+            A better and much faster messaging App
+
+            <img class="svg" src="example-app.svg" />
+            <img class="transparent-img" src="slack.svg" />
+          </script>
+        </section>
+
+        <section>
+          <h2>Why GraphQL?</h2>
+          <p>Before getting into GraphQL let's look at some REST API best practices.</p>
+        </section>
+
+        <section data-markdown>
+          ### RESTfulness: Granularity
+
+          `GET /api/v1/messages`
+          ```json
+          [{
+            "id": "msg-id",
+            "text": "msg-content"
+          }]
+          ```
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### RESTfulness: Leverage HTTP verbs
+
+            ```rest
+            POST /api/v1/messages
+            ```
+
+            ```rest
+            GET /api/v1/messages/:id
+            ```
+
+            ```rest
+            PATCH /api/v1/messages/:id
+            ```
+
+            ```rest
+            PUT /api/v1/messages/:id
+            ```
+
+            ```rest
+            DELETE /api/v1/messages/:id
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### RESTfulness: URLs are resources not actions
+
+            ```rest
+            PATCH /api/v1/messages/:id
+            ```
+
+            Not:
+
+            ```rest
+            POST /api/v1/update-message
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### RESTfulness: Resources are represented by an unique URL and a format.
+
+            ```rest
+            GET /api/v1/messages/:id
+            Accept: application/json
+            ```
+            ```json
+            {
+            "id": "id",
+            "text": "msg-content"
+            }
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### RESTfulness: Discoverability
+
+            Hypermedia As The Engine Of Application State ([HATEOAS](https://en.wikipedia.org/wiki/HATEOAS))
+
+            ```rest
+            GET /api/v1/channels/:id
+            ```
+            ```json
+            {
+              "id": "id",
+              "name": "channel name",
+              "createdByUserId": "user-id",
+              "links": {
+                "self": {
+                  "href": "/api/v1/channels/$id"
+                },
+                "messages": {
+                  "href": "/api/v1/channels/id/messages",
+                  "totalCount": 100,
+                },
+                "creator": {
+                  "href": "/api/v1/users/user-id"
+                }
+              }
+            }
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### RESTfulness: OpenAPI Documentation
+
+            [OpenAPI Specification](https://www.openapis.org/)
+
+            defines a **standard**, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service.
+
+          </script>
+        </section>
+
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Our API is RESTful and follows all the best practices
+
+            🙌
+          </script>
+        </section>
+
+        <section>
+          <div data-markdown>
+          <script type="text/template">
+            ## But real life requirements...
+
+            > On the App landing page, we need the channels and their messages<br/>
+            > -- An amazing product manager
+          </script>
+          </div>
+          <div data-markdown class="fragment">
+            <script type="text/template">
+             * Channel 1
+              * Message 1.1
+              * Message 1.2
+              * ...
+             * Channel 2
+              * Message 2.1
+              * Message 2.2
+             * ...
+            </script>
+          </div>
+
+        </section>
+
+        <section>
+          <h2>Yes.</h2>
+          <h2>I can do this,</h2>
+          <h2>Easy!</h2>
+          <h4>-- The naive me</h4>
+        </section>
+
+        <section>
+          <h3>Our Javascript hat on!</h3>
+          <pre><code class="hljs js small" data-trim>
+const channels = await fetchJSON('/api/v1/channels');
+const msgPromises = channels.map(async function(channel) {
+   // These links are so amazing!
+   const messages = await fetchJSON(channel.links.messages);
+   channel.messages = messages;
+});
+await Promise.all(msgPromises);
+console.log(channels[0]);
+          </code></pre>
+          <pre><code class="hljs json small" data-trim>
+{
+  "id": "channel-id",
+  "name": "channel name",
+  "messages": [{
+    "id": "message-id",
+    "text": "content",
+    "links": ...
+   }],
+  "links": ...
+}
+          </code></pre>
+          <h3 class="fragment">Great Success! 🌮🌮</h3>
+        </section>
+
+        <section>
+          <img width="500px" class="transparent-img" src="gopher-fine.jpg" />
+        </section>
+
+        <section>
+          <div data-markdown>
+            <script type="text/template">
+              😱
+
+              > Our bigger customers are complaining about performance.<br/>
+              >
+              > Also we need to display the user of each of those messages.<br/>
+              >
+              > -- An amazing product manager
+            </script>
+          </div>
+        </section>
+
+        <section>
+          <div data-markdown>
+            <script type="text/template">
+              ## The N+1 Problem
+
+              100 channels = 1 + 100 requests to get messages.<br/>
+              1. [1] `GET /api/v1/channels` ~100ms
+              2. [N] foreach Channels:<br/> `GET /api/v1/channels/:id/messages` ~100ms
+
+              n=10 => 1.1s <br/>
+              n=100 => 10.1s
+            </script>
+          </div>
+          <div class="fragment box small">
+            Let's get the author of each messages<br/>
+
+            <small>1 (channels) + 100 (messages of channels) + X (number of messages)</small>
+          </div>
+        </section>
+
+
+        <section>
+          <div data-markdown>
+            <script type="text/template">
+              ## Back to the drawing board
+
+              📝
+
+               Before putting everything in the `Channel` resource...<br/>
+               What are other people doing?
+            </script>
+          </div>
+        </section>
+
+        <section>
+          <div data-markdown>
+            <script type="text/template">
+              ## Hypertext Application Language [HAL](https://en.wikipedia.org/wiki/Hypertext_Application_Language)
+
+              ```rest
+              GET /api/v1/channels/:id
+              Accept: application/hal+json
+              ```
+            </script>
+          </div>
+
+          <div>
+            <pre><code class="hljs json small" data-trim data-line-numbers="5-28">
+{
+  "id": "id",
+  "name": "channel name",
+  "createdByUserId": "user-id",
+  "_embedded": {
+    "messages": [{
+      "id": "msg-id",
+      "text": "some-text",
+      "_embedded": {
+          "author": {
+            "id": "user-id",
+            "name": "user name",
+            "_links": { ... }
+          }
+      },
+      "_links": {
+        "self": {
+          "href": "/api/v1/messages/$id"
+        },
+        "channel": {
+          "href": "/api/v1/channels/id",
+        },
+        "creator": {
+          "href": "/api/v1/users/user-id"
+        }
+      }
+    }]
+  },
+  "_links": {
+    "self": {
+      "href": "/api/v1/channels/$id"
+    },
+    "messages": {
+      "href": "/api/v1/channels/id/messages"
+    },
+    "creator": {
+      "href": "/api/v1/users/user-id"
+    }
+  }
+}
+          </code></pre></div>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## [JSON API](https://jsonapi.org/)
+
+            Like HAL but with a flat structure and standardized URLs.
+
+            ```rest
+            GET /api/v1/channels
+                  ?include=messages
+                  &include[messages]=author
+                  &fields[channels]=name
+                  &fields[messages]=text
+                  &fields[messages][author]=name
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### [JSON API](https://jsonapi.org/) - Payload
+
+            ```json
+            {
+              "data": [{
+                "type": "channel",
+                "id": "1",
+                "attributes": {
+                  "name": "channel name"
+                },
+                "relationships": {
+                  "messages": {
+                    "data": [{
+                      "id": "msg-id", "type": "message",
+                    }, {
+                      "id": "msg-id2", "type": "message",
+                    }, {
+                      "id": "msg-id3", "type": "message",
+                    }]
+                  }
+                }
+              }],
+              "included": [{
+                "type": "user",
+                "id": "user-id",
+                "attributes": {
+                  "name": "user name"
+                }
+              }, {
+                "type": "message",
+                "id": "msg-id",
+                "attributes": {
+                  "text": "msg text"
+                },
+                "relationships": {
+                  "author": {
+                    "data": {"id": "user-id", "type": "user"}
+                  }
+                }
+              }, {
+                "type": "message",
+                "id": "msg-id2",
+                "attributes": {
+                  "text": "msg text"
+                },
+                "relationships": {
+                  "author": {
+                    "data": {"id": "user-id", "type": "user"}
+                  }
+                }
+              }, {
+                "type": "message",
+                "id": "msg-id3",
+                "attributes": {
+                  "text": "msg text"
+                },
+                "relationships": {
+                  "author": {
+                    "data": {"id": "user-id", "type": "user"}
+                  }
+                }
+              }]
+            }
+            ```
+
+            Imagine some links in there as well :)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+           ## Let's Rewind
+
+           ⏪
+
+           <img src="rabbit-hole.gif" />
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Our Example Application
+
+            A better and much faster messaging App
+
+            <img class="svg" src="example-app.svg" />
+            <img class="transparent-img" src="slack.svg" />
+          </script>
+        </section>
+
+
+        <section data-background-iframe="https://graphql.org/" data-background-opacity="0.7" style="margin-left:-200px;">
+          <img style="width:200px;" class="transparent-img" src="graphql.svg" />
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # GraphQL
+
+            * Overview
+            * Schema
+            * Some Go with gqlgen
+
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## GraphQL Overview
+
+            * GraphQL has a Schema.
+            * GraphQL is transport agnostic.
+            * GraphQL on HTTP is accessed with one single endpoint:
+              * `POST /graphql`
+              * `GET /graphql` for queries only
+
+          </script>
+        </section>
+
+        <section>
+          <h3>What is this about a Graph?</h3>
+          <img class="transparent-img" src="graphql-graph-view.svg" />
+        </section>
+
+        <!--
+        <section>
+          <h4>What is this about a Graph? (advanced)</h4>
+          <img class="transparent-img" width="65%" src="graphql-graph-view-pagination.svg" />
+        </section>
+        -->
+
+        <section>
+          <h3>Queries &bullet; Mutations &bullet; Subscriptions</h3>
+          <img class="transparent-img" src="rest-mapping-tp-graphql.png" />
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Let's experiment
+
+            🧪
+
+            ### GraphQL Playground
+            ### Let's build our own server
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+           ## Want more?
+           ### Here is what I haven't talked about
+
+           * GraphQL 💜 Microservices<br/>(Ask me about Manifold's Architecture)
+           * Subscriptions: GraphQL primitive allowing easy integration with websocket, rabbitmq, any pubsub.
+           * Pagination (ask me about it)
+           * Advanced schema (unions, interfaces, schema directives, ...)
+           * Advanced querying with fragments and directives
+           * Client code generation
+           * So much more
+          </script>
+        </section>
+
+        <section data-markdown class="todo">
+          ## The End!
+        </section>
+
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+     // More info about config & dependencies:
+     // - https://github.com/hakimel/reveal.js#configuration
+     // - https://github.com/hakimel/reveal.js#dependencies
+     Reveal.initialize({
+       controls: true,
+       progress: true,
+       center: true,
+       hash: true,
+       fragmentInURL: true,
+
+       transition: "slide", // none/fade/slide/convex/concave/zoom
+
+       dependencies: [
+         {
+           src: "plugin/markdown/marked.js"
+         },
+         {
+           src: "plugin/markdown/markdown.js"
+         },
+         {
+           src: "plugin/notes/notes.js",
+           async: true
+         },
+         {
+           // src: "plugin/highlight/highlight.js",
+           src: "highlight-plugin.js",
+           async: true
+         }
+       ]
+     });
+    </script>
+  </body>
+</html>

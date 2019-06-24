@@ -12,8 +12,11 @@
 {{ reserveImport "github.com/vektah/gqlparser/ast" }}
 {{ reserveImport "github.com/99designs/gqlgen/graphql" }}
 {{ reserveImport "github.com/99designs/gqlgen/graphql/introspection" }}
+{{ reserveImport "github.com/seriousben/simple-graphql-chat/internal/db" }}
 
-type {{.ResolverType}} struct {}
+type {{.ResolverType}} struct {
+	DB *db.DB
+}
 
 {{ range $object := .Objects -}}
 	{{- if $object.HasResolvers -}}

@@ -12,7 +12,7 @@ enum ChannelMemberSortKey {
 type Channel
 {
   id: ID!
-  displayName: String!
+  name: String!
   createdBy: User!
 
   """
