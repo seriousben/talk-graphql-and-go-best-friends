@@ -1,0 +1,2 @@
+* `go run github.com/vektah/dataloaden UserLoader string "*github.com/seriousben/talk-graphql/donedataloader.User"`
+* `go run github.com/vektah/dataloaden ChannelLoader string "*github.com/seriousben/talk-graphql/donedataloader.Channel"`

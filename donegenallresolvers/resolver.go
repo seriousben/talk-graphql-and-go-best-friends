@@ -1,4 +1,4 @@
-package donehookwithsql
+package donegenallresolvers
 
 import (
 	"context"
@@ -11,11 +11,32 @@ type Resolver struct {
 	DB *db.DB
 }
 
+func (r *Resolver) Channel() ChannelResolver {
+	return &channelResolver{r}
+}
+func (r *Resolver) Message() MessageResolver {
+	return &messageResolver{r}
+}
 func (r *Resolver) Mutation() MutationResolver {
 	return &mutationResolver{r}
 }
 func (r *Resolver) Query() QueryResolver {
 	return &queryResolver{r}
+}
+
+type channelResolver struct{ *Resolver }
+
+func (r *channelResolver) CreatedBy(ctx context.Context, obj *Channel) (*User, error) {
+	panic("not implemented")
+}
+func (r *channelResolver) Messages(ctx context.Context, obj *Channel) ([]*Message, error) {
+	panic("not implemented")
+}
+
+type messageResolver struct{ *Resolver }
+
+func (r *messageResolver) CreatedBy(ctx context.Context, obj *Message) (*User, error) {
+	panic("not implemented")
 }
 
 type mutationResolver struct{ *Resolver }

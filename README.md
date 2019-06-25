@@ -10,3 +10,10 @@ In this talk, I will:
 * Explain how API consumers would leverage this GraphQL API
 * Introduce https://github.com/99designs/gqlgen
 * Explain the important pieces of implementing a GraphQL API in Go with gqlgen
+
+Lab steps:
+ * Gen
+ * SQL Setup
+ * Gen all resolvers
+ * Implementation done
+ * Dataloader

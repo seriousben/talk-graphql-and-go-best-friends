@@ -43,17 +43,19 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Channel struct {
-		CreatedBy func(childComplexity int) int
-		ID        func(childComplexity int) int
-		Messages  func(childComplexity int) int
-		Name      func(childComplexity int) int
+		CreatedBy   func(childComplexity int) int
+		CreatedByID func(childComplexity int) int
+		ID          func(childComplexity int) int
+		Messages    func(childComplexity int) int
+		Name        func(childComplexity int) int
 	}
 
 	Message struct {
-		Channel   func(childComplexity int) int
-		CreatedBy func(childComplexity int) int
-		ID        func(childComplexity int) int
-		Text      func(childComplexity int) int
+		Channel     func(childComplexity int) int
+		CreatedBy   func(childComplexity int) int
+		CreatedByID func(childComplexity int) int
+		ID          func(childComplexity int) int
+		Text        func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -99,6 +101,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Channel.CreatedBy(childComplexity), true
 
+	case "Channel.createdById":
+		if e.complexity.Channel.CreatedByID == nil {
+			break
+		}
+
+		return e.complexity.Channel.CreatedByID(childComplexity), true
+
 	case "Channel.id":
 		if e.complexity.Channel.ID == nil {
 			break
@@ -133,6 +142,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Message.CreatedBy(childComplexity), true
+
+	case "Message.createdById":
+		if e.complexity.Message.CreatedByID == nil {
+			break
+		}
+
+		return e.complexity.Message.CreatedByID(childComplexity), true
 
 	case "Message.id":
 		if e.complexity.Message.ID == nil {
@@ -267,6 +283,7 @@ type Channel {
   id: ID!
   name: String!
   createdBy: User!
+  createdById: ID!
   messages: [Message!]!
 }
 
@@ -274,6 +291,7 @@ type Message {
   id: ID!
   text: String!
   createdBy: User!
+  createdById: ID!
   channel: Channel!
 }
 
@@ -288,7 +306,8 @@ input NewMessage {
 
 type Mutation {
   createMessage(input: NewMessage!): Message!
-}`},
+}
+`},
 )
 
 // endregion ************************** generated!.gotpl **************************
@@ -300,7 +319,7 @@ func (ec *executionContext) field_Mutation_createMessage_args(ctx context.Contex
 	args := map[string]interface{}{}
 	var arg0 NewMessage
 	if tmp, ok := rawArgs["input"]; ok {
-		arg0, err = ec.unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐNewMessage(ctx, tmp)
+		arg0, err = ec.unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐNewMessage(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -433,7 +452,34 @@ func (ec *executionContext) _Channel_createdBy(ctx context.Context, field graphq
 	res := resTmp.(*User)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐUser(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐUser(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Channel_createdById(ctx context.Context, field graphql.CollectedField, obj *Channel) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "Channel",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedByID, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Channel_messages(ctx context.Context, field graphql.CollectedField, obj *Channel) graphql.Marshaler {
@@ -460,7 +506,7 @@ func (ec *executionContext) _Channel_messages(ctx context.Context, field graphql
 	res := resTmp.([]*Message)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessage2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐMessage(ctx, field.Selections, res)
+	return ec.marshalNMessage2ᚕᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐMessage(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Message_id(ctx context.Context, field graphql.CollectedField, obj *Message) graphql.Marshaler {
@@ -541,7 +587,34 @@ func (ec *executionContext) _Message_createdBy(ctx context.Context, field graphq
 	res := resTmp.(*User)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐUser(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐUser(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Message_createdById(ctx context.Context, field graphql.CollectedField, obj *Message) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "Message",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedByID, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Message_channel(ctx context.Context, field graphql.CollectedField, obj *Message) graphql.Marshaler {
@@ -568,7 +641,7 @@ func (ec *executionContext) _Message_channel(ctx context.Context, field graphql.
 	res := resTmp.(*Channel)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐChannel(ctx, field.Selections, res)
+	return ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐChannel(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Mutation_createMessage(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -602,7 +675,7 @@ func (ec *executionContext) _Mutation_createMessage(ctx context.Context, field g
 	res := resTmp.(*Message)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐMessage(ctx, field.Selections, res)
+	return ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐMessage(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_channels(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -629,7 +702,7 @@ func (ec *executionContext) _Query_channels(ctx context.Context, field graphql.C
 	res := resTmp.([]*Channel)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐChannel(ctx, field.Selections, res)
+	return ec.marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐChannel(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -1630,6 +1703,11 @@ func (ec *executionContext) _Channel(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
+		case "createdById":
+			out.Values[i] = ec._Channel_createdById(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
 		case "messages":
 			out.Values[i] = ec._Channel_messages(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -1669,6 +1747,11 @@ func (ec *executionContext) _Message(ctx context.Context, sel ast.SelectionSet, 
 			}
 		case "createdBy":
 			out.Values[i] = ec._Message_createdBy(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "createdById":
+			out.Values[i] = ec._Message_createdById(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
@@ -2054,11 +2137,11 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
-func (ec *executionContext) marshalNChannel2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐChannel(ctx context.Context, sel ast.SelectionSet, v Channel) graphql.Marshaler {
+func (ec *executionContext) marshalNChannel2githubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐChannel(ctx context.Context, sel ast.SelectionSet, v Channel) graphql.Marshaler {
 	return ec._Channel(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐChannel(ctx context.Context, sel ast.SelectionSet, v []*Channel) graphql.Marshaler {
+func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐChannel(ctx context.Context, sel ast.SelectionSet, v []*Channel) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2082,7 +2165,7 @@ func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsi
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐChannel(ctx, sel, v[i])
+			ret[i] = ec.marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐChannel(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2095,7 +2178,7 @@ func (ec *executionContext) marshalNChannel2ᚕᚖgithubᚗcomᚋseriousbenᚋsi
 	return ret
 }
 
-func (ec *executionContext) marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐChannel(ctx context.Context, sel ast.SelectionSet, v *Channel) graphql.Marshaler {
+func (ec *executionContext) marshalNChannel2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐChannel(ctx context.Context, sel ast.SelectionSet, v *Channel) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -2119,11 +2202,11 @@ func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.Selec
 	return res
 }
 
-func (ec *executionContext) marshalNMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐMessage(ctx context.Context, sel ast.SelectionSet, v Message) graphql.Marshaler {
+func (ec *executionContext) marshalNMessage2githubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐMessage(ctx context.Context, sel ast.SelectionSet, v Message) graphql.Marshaler {
 	return ec._Message(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNMessage2ᚕᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐMessage(ctx context.Context, sel ast.SelectionSet, v []*Message) graphql.Marshaler {
+func (ec *executionContext) marshalNMessage2ᚕᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐMessage(ctx context.Context, sel ast.SelectionSet, v []*Message) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2147,7 +2230,7 @@ func (ec *executionContext) marshalNMessage2ᚕᚖgithubᚗcomᚋseriousbenᚋsi
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐMessage(ctx, sel, v[i])
+			ret[i] = ec.marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐMessage(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2160,7 +2243,7 @@ func (ec *executionContext) marshalNMessage2ᚕᚖgithubᚗcomᚋseriousbenᚋsi
 	return ret
 }
 
-func (ec *executionContext) marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐMessage(ctx context.Context, sel ast.SelectionSet, v *Message) graphql.Marshaler {
+func (ec *executionContext) marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐMessage(ctx context.Context, sel ast.SelectionSet, v *Message) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -2170,7 +2253,7 @@ func (ec *executionContext) marshalNMessage2ᚖgithubᚗcomᚋseriousbenᚋsimpl
 	return ec._Message(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐNewMessage(ctx context.Context, v interface{}) (NewMessage, error) {
+func (ec *executionContext) unmarshalNNewMessage2githubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐNewMessage(ctx context.Context, v interface{}) (NewMessage, error) {
 	return ec.unmarshalInputNewMessage(ctx, v)
 }
 
@@ -2188,11 +2271,11 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNUser2githubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐUser(ctx context.Context, sel ast.SelectionSet, v User) graphql.Marshaler {
+func (ec *executionContext) marshalNUser2githubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐUser(ctx context.Context, sel ast.SelectionSet, v User) graphql.Marshaler {
 	return ec._User(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋsimpleᚑgraphqlᚑchatᚋdonehookwithsqlᚐUser(ctx context.Context, sel ast.SelectionSet, v *User) graphql.Marshaler {
+func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋseriousbenᚋtalkᚑgraphqlᚋdonehookwithsqlᚐUser(ctx context.Context, sel ast.SelectionSet, v *User) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")

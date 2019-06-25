@@ -3,17 +3,19 @@
 package donegen
 
 type Channel struct {
-	ID        string     `json:"id"`
-	Name      string     `json:"name"`
-	CreatedBy *User      `json:"createdBy"`
-	Messages  []*Message `json:"messages"`
+	ID          string     `json:"id"`
+	Name        string     `json:"name"`
+	CreatedBy   *User      `json:"createdBy"`
+	CreatedByID string     `json:"createdById"`
+	Messages    []*Message `json:"messages"`
 }
 
 type Message struct {
-	ID        string   `json:"id"`
-	Text      string   `json:"text"`
-	CreatedBy *User    `json:"createdBy"`
-	Channel   *Channel `json:"channel"`
+	ID          string   `json:"id"`
+	Text        string   `json:"text"`
+	CreatedBy   *User    `json:"createdBy"`
+	CreatedByID string   `json:"createdById"`
+	Channel     *Channel `json:"channel"`
 }
 
 type NewMessage struct {
