@@ -203,7 +203,7 @@ func (db *DB) CreateUser(ctx context.Context, u *User) error {
 }
 
 func (db *DB) ListChannels(ctx context.Context) ([]*Channel, error) {
-	log.Println("db.ListChannels")
+	log.Println("db.ListChannels - SELECT id, name, created_by_user_id FROM channel")
 	cs := []*Channel{}
 
 	err := db.conn.Select(&cs, "SELECT id, name, created_by_user_id FROM channel")
@@ -215,7 +215,7 @@ func (db *DB) ListChannels(ctx context.Context) ([]*Channel, error) {
 }
 
 func (db *DB) ListChannelsByID(ctx context.Context, ids []int) ([]*Channel, error) {
-	log.Println("db.ListChannelsByID")
+	log.Println("db.ListChannelsByID - SELECT id, name, created_by_user_id FROM channel WHERE id IN (?)", ids)
 	cs := []*Channel{}
 
 	query, args, err := sqlx.In("SELECT id, name, created_by_user_id FROM channel WHERE id IN (?)", ids)
@@ -233,7 +233,7 @@ func (db *DB) ListChannelsByID(ctx context.Context, ids []int) ([]*Channel, erro
 }
 
 func (db *DB) ListUsers(ctx context.Context, ids []int) ([]*User, error) {
-	log.Println("db.ListUsers")
+	log.Println("db.ListUsers - SELECT id, name FROM user_account WHERE id IN (?)", ids)
 	us := []*User{}
 
 	query, args, err := sqlx.In("SELECT id, name FROM user_account WHERE id IN (?)", ids)
@@ -251,7 +251,7 @@ func (db *DB) ListUsers(ctx context.Context, ids []int) ([]*User, error) {
 }
 
 func (db *DB) ListMessages(ctx context.Context, channelID int) ([]*Message, error) {
-	log.Println("db.ListMessages")
+	log.Println("db.ListMessages - SELECT id, text_content, created_by_user_id, channel_id FROM message WHERE channel_id = $1", channelID)
 	ms := []*Message{}
 
 	err := db.conn.Select(&ms, "SELECT id, text_content, created_by_user_id, channel_id FROM message WHERE channel_id = $1", channelID)
