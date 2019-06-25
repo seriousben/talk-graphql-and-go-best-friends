@@ -1,0 +1,28 @@
+# .gqlgen.yml example
+#
+# Refer to https://gqlgen.com/config/
+# for detailed .gqlgen.yml documentation.
+
+schema:
+- schema.graphql
+exec:
+  filename: generated.go
+model:
+  filename: models_gen.go
+resolver:
+  filename: resolver.go
+  type: Resolver
+
+models:
+  Message:
+    fields:
+      createdBy:
+        resolver: true
+      channel:
+        resolver: true
+  Channel:
+    fields:
+      messages:
+        resolver: true
+      createdBy:
+        resolver: true

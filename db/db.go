@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/brianvoe/gofakeit"
@@ -70,24 +71,56 @@ type User struct {
 }
 
 type Channel struct {
-	ID   int    `db:"id"`
-	Name string `db:"name"`
+	ID          int    `db:"id"`
+	Name        string `db:"name"`
+	CreatedByID int    `db:"created_by_user_id"`
 }
 
 type Message struct {
-	ID        int    `db:"id"`
-	Text      string `db:"text_content"`
-	ChannelID int    `db:"channel_id"`
+	ID          int    `db:"id"`
+	Text        string `db:"text_content"`
+	ChannelID   int    `db:"channel_id"`
+	CreatedByID int    `db:"created_by_user_id"`
 }
 
 func (db *DB) AddFixtures() error {
-	for i := 0; i != 5; i++ {
+	gofakeit.Seed(0)
+	u := User{
+		Name: gofakeit.Name(),
+	}
+	err := db.CreateUser(context.Background(), &u)
+	if err != nil {
+		return err
+	}
+
+	for i := 0; i != 3; i++ {
 		c := Channel{
-			Name: gofakeit.Company(),
+			Name:        gofakeit.Company(),
+			CreatedByID: u.ID,
 		}
 		err := db.CreateChannel(context.Background(), &c)
 		if err != nil {
 			return err
+		}
+
+		u2 := User{
+			Name: gofakeit.Name(),
+		}
+		err = db.CreateUser(context.Background(), &u2)
+		if err != nil {
+			return err
+		}
+
+		for j := 0; j != 3; j++ {
+			m := Message{
+				Text:        gofakeit.HackerPhrase(),
+				ChannelID:   c.ID,
+				CreatedByID: u2.ID,
+			}
+			err := db.CreateMessage(context.Background(), &m)
+			if err != nil {
+				return err
+			}
 		}
 	}
 
@@ -96,8 +129,8 @@ func (db *DB) AddFixtures() error {
 
 func (db *DB) CreateMessage(ctx context.Context, m *Message) error {
 	table := "message"
-	fields := "text_content, channel_id"
-	namedFields := ":text_content, :channel_id"
+	fields := "text_content, channel_id, created_by_user_id"
+	namedFields := ":text_content, :channel_id, :created_by_user_id"
 
 	stmt := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s) RETURNING id", table, fields, namedFields)
 
@@ -121,8 +154,8 @@ func (db *DB) CreateMessage(ctx context.Context, m *Message) error {
 
 func (db *DB) CreateChannel(ctx context.Context, c *Channel) error {
 	table := "channel"
-	fields := "name"
-	namedFields := ":name"
+	fields := "name, created_by_user_id"
+	namedFields := ":name, :created_by_user_id"
 
 	stmt := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s) RETURNING id", table, fields, namedFields)
 
@@ -170,9 +203,10 @@ func (db *DB) CreateUser(ctx context.Context, u *User) error {
 }
 
 func (db *DB) ListChannels(ctx context.Context) ([]*Channel, error) {
+	log.Println("db.ListChannels")
 	cs := []*Channel{}
 
-	err := db.conn.Select(&cs, "SELECT id, name FROM channel")
+	err := db.conn.Select(&cs, "SELECT id, name, created_by_user_id FROM channel")
 	if err != nil {
 		return nil, err
 	}
@@ -180,10 +214,35 @@ func (db *DB) ListChannels(ctx context.Context) ([]*Channel, error) {
 	return cs, nil
 }
 
-func (db *DB) ListUsers(ctx context.Context) ([]*User, error) {
+func (db *DB) ListChannelsByID(ctx context.Context, ids []int) ([]*Channel, error) {
+	log.Println("db.ListChannelsByID")
+	cs := []*Channel{}
+
+	query, args, err := sqlx.In("SELECT id, name, created_by_user_id FROM channel WHERE id IN (?)", ids)
+	if err != nil {
+		return nil, err
+	}
+
+	query = db.conn.Rebind(query)
+	err = db.conn.Select(&cs, query, args...)
+	if err != nil {
+		return nil, err
+	}
+
+	return cs, nil
+}
+
+func (db *DB) ListUsers(ctx context.Context, ids []int) ([]*User, error) {
+	log.Println("db.ListUsers")
 	us := []*User{}
 
-	err := db.conn.Select(&us, "SELECT id, name FROM user_account")
+	query, args, err := sqlx.In("SELECT id, name FROM user_account WHERE id IN (?)", ids)
+	if err != nil {
+		return nil, err
+	}
+
+	query = db.conn.Rebind(query)
+	err = db.conn.Select(&us, query, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -191,10 +250,11 @@ func (db *DB) ListUsers(ctx context.Context) ([]*User, error) {
 	return us, nil
 }
 
-func (db *DB) ListMessages(ctx context.Context, channelID string) ([]*Message, error) {
+func (db *DB) ListMessages(ctx context.Context, channelID int) ([]*Message, error) {
+	log.Println("db.ListMessages")
 	ms := []*Message{}
 
-	err := db.conn.Select(&ms, "SELECT id, text_content FROM message")
+	err := db.conn.Select(&ms, "SELECT id, text_content, created_by_user_id, channel_id FROM message WHERE channel_id = $1", channelID)
 	if err != nil {
 		return nil, err
 	}
