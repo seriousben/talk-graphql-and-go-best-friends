@@ -1,0 +1,34 @@
+type User {
+  id: ID!
+  name: String!
+}
+
+type Channel {
+  id: ID!
+  name: String!
+  createdBy: User!
+  createdById: ID!
+  messages: [Message!]!
+}
+
+type Message {
+  id: ID!
+  text: String!
+  createdBy: User!
+  createdById: ID!
+  channel: Channel!
+  channelId: ID!
+}
+
+type Query {
+  channels: [Channel!]!
+}
+
+input NewMessage {
+  channelId: ID!
+  text: String!
+}
+
+type Mutation {
+  createMessage(input: NewMessage!): Message!
+}

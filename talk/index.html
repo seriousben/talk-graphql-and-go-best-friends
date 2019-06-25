@@ -538,6 +538,8 @@ console.log(channels[0]);
 
             * GraphQL has a Schema.
             * GraphQL is transport agnostic.
+            * Fetch only what you need
+            * Allow fetching complex relationship in one request
             * GraphQL on HTTP is accessed with one single endpoint:
               * `POST /graphql`
               * `GET /graphql` for queries only
@@ -546,9 +548,172 @@ console.log(channels[0]);
         </section>
 
         <section>
+          <h4>Queries &bullet; Mutations &bullet; Subscriptions</h4>
+          <img class="transparent-img" src="media/rest-mapping-tp-graphql.png" />
+        </section>
+
+        <section>
+          <h3>Schema</h3>
+          <div class="stretch" style="display:flex;flex-direction:row;justify-content:space-around;align-content:center;">
+            <div style="width:50%;">
+            <pre><code style="max-height:none;height:100%;" class="hljs graphql small" data-trim>
+type User {
+  id: ID!
+  name: String!
+}
+
+type Channel {
+  id: ID!
+  name: String!
+  createdBy: User!
+  createdById: ID!
+  messages: [Message!]!
+}
+
+type Message {
+  id: ID!
+  text: String!
+  createdBy: User!
+  createdById: ID!
+  channel: Channel!
+  channelId: ID!
+}
+
+            </code></pre>
+            </div>
+            <div style="width:50%;">
+              <pre><code style="max-height:none;height:100%;" class="hljs graphql small" data-trim>
+type Query {
+  channels: [Channel!]!
+}
+
+input NewMessage {
+  channelId: ID!
+  text: String!
+}
+
+type Mutation {
+  createMessage(input: NewMessage!): Message!
+}
+
+            </code></pre>
+          </div>
+
+          </div>
+        </section>
+
+
+        <section>
           <h3>What is this about a Graph?</h3>
           <img class="transparent-img" src="media/graphql-graph-view.svg" />
         </section>
+
+        <section>
+          <h4>Query</h4>
+          <div class="stretch" style="display:flex;flex-direction:row;justify-content:space-around;align-content:center;">
+            <div style="width:50%;">
+            <pre><code style="max-height:none;height:100%;" class="hljs graphql small" data-trim>
+query getChannelsForFrontpage{
+  channels {
+    name
+    createdBy {
+      name
+    }
+    messages {
+      text
+      createdBy {
+        name
+      }
+      channel {
+        name
+      }
+    }
+  }
+}
+            </code></pre>
+            </div>
+            <div style="width:50%;">
+              <pre><code style="max-height:none;height:100%;" class="hljs json small" data-trim>
+{
+  "data": {
+    "channels": [
+      {
+        "name": "Nader, Zemlak and Mayer",
+        "createdBy": {
+          "name": "Ophelia Ebert"
+        },
+        "messages": [
+          {
+            "text": "You can't synthesize the transmitter without synthesizing the back-end USB pixel!",
+            "createdBy": {
+              "name": "Bettye Kshlerin"
+            },
+            "channel": {
+              "name": "Nader, Zemlak and Mayer"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+            </code></pre>
+          </div>
+
+          </div>
+        </section>
+
+        <section>
+          <h4>Mutation</h4>
+          <div class="stretch" style="display:flex;flex-direction:row;justify-content:space-around;align-content:center;">
+            <div style="width:50%;">
+              <pre><code style="max-height:none;height:100%;" class="hljs graphql small" data-trim>
+mutation createMsg($newMsg: NewMessage!) {
+  createMessage(input: $newMsg) {
+    id
+    text
+    channel {
+      name
+      createdBy {
+        name
+      }
+    }
+  }
+}
+            </code></pre>
+            <pre><code style="max-height:none;height:100%;" class="hljs json small" data-trim>
+# Variables
+{
+  "newMsg": {
+    "channelId": 3,
+    "text": "testing"
+  }
+}
+            </code></pre>
+
+            </div>
+            <div style="width:50%;">
+              <pre><code style="max-height:none;height:100%;" class="hljs json small" data-trim>
+{
+  "data": {
+    "createMessage": {
+      "id": "10",
+      "text": "testing",
+      "channel": {
+        "name": "Ullrich-McCullough",
+        "createdBy": {
+          "name": "Ophelia Ebert"
+        }
+      }
+    }
+  }
+}
+            </code></pre>
+          </div>
+
+          </div>
+        </section>
+
 
         <!--
         <section>
@@ -556,11 +721,6 @@ console.log(channels[0]);
           <img class="transparent-img" width="65%" src="media/graphql-graph-view-pagination.svg" />
         </section>
         -->
-
-        <section>
-          <h3>Queries &bullet; Mutations &bullet; Subscriptions</h3>
-          <img class="transparent-img" src="media/rest-mapping-tp-graphql.png" />
-        </section>
 
         <section data-markdown>
           <script type="text/template">
