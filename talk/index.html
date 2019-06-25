@@ -288,7 +288,7 @@
 const channels = await fetchJSON('/api/v1/channels');
 const msgPromises = channels.map(async function(channel) {
    // These links are so amazing!
-   const messages = await fetchJSON(channel.links.messages);
+   const messages = await fetchJSON(channel.links.messages.href);
    channel.messages = messages;
 });
 await Promise.all(msgPromises);
@@ -343,7 +343,7 @@ console.log(channels[0]);
           <div class="fragment box small">
             Let's get the author of each messages<br/>
 
-            <small>1 (channels) + 100 (messages of channels) + X (number of messages)</small>
+            <small>1 (channels) + 100 (messages of channels) + X (author of messages)</small>
           </div>
         </section>
 
@@ -530,17 +530,6 @@ console.log(channels[0]);
 
         <section data-background-iframe="https://graphql.org/" data-background-opacity="0.7" style="margin-left:-200px;">
           <img style="width:200px;" class="transparent-img" src="media/graphql.svg" />
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            # GraphQL
-
-            * Overview
-            * Schema
-            * Some Go with gqlgen
-
-          </script>
         </section>
 
         <section data-markdown>
