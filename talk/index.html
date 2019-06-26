@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta2 name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>GraphQL and Go, Best Friends?</title>
 
@@ -88,6 +88,8 @@
             * I have seen SOAP, EJB, RMI, Corba, REST, gRPC, Websocket and GraphQL APIs...😅
             * I work at Manifold! Please take some stickers
             * First time talking about GraphQL
+
+            @seriousben
           </script>
         </section>
 
@@ -107,10 +109,11 @@
           <script type="text/template">
             ## What is this talk about?
             <ul>
-              <li class="fragment">Introducing GraphQL</li>
-              <li class="fragment">Building a GraphQL API in go</li>
-              <li class="fragment">Shaking some preconceptions<br/><strong>You don't have to be RESTful</strong> 🥳</li>
+              <li class="fragment">Why GraphQL?</li>
+              <li class="fragment">What is GraphQL?</li>
+              <li class="fragment">How to GraphQL in go?</li>
             </ul>
+            <div class="fragment">Shaking some preconceptions<br/><strong>You don't have to be RESTful</strong> 🥳</div>
           </script>
         </section>
 
@@ -534,15 +537,14 @@ console.log(channels[0]);
 
         <section data-markdown>
           <script type="text/template">
-            ## GraphQL Overview
+            ## GraphQL Features
 
-            * GraphQL has a Schema.
-            * GraphQL is transport agnostic.
-            * Fetch only what you need
-            * Allow fetching complex relationship in one request
-            * GraphQL on HTTP is accessed with one single endpoint:
-              * `POST /graphql`
-              * `GET /graphql` for queries only
+            * Has a Schema
+            * Allows clients to only fetch what they need<br/>(fields and relationships)
+            * Allows fetching complex and deep relationships in one request
+            * Is not only a Query Language
+            * Generates documentation
+            * Allows generating "type-safe" client code
 
           </script>
         </section>
