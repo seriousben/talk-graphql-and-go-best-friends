@@ -11,9 +11,29 @@ In this talk, I will:
 * Introduce https://github.com/99designs/gqlgen
 * Explain the important pieces of implementing a GraphQL API in Go with gqlgen
 
+Folders:
+* `db`: Our database package used to focus only on GraphQL
+* `experiement`: Folder in which live coding will happen
+* `talk`: Source of the slides
+* `oven`: Contains fallbacks when something really bad happens during live coding
+
+## [Start experimenting](./experiment)
+
 Lab steps:
- * Gen
- * SQL Setup
- * Gen all resolvers
- * Implementation done
- * Dataloader
+1. Show Schema
+1. Show gqlgen.yml
+1. Gen code `make gen`
+1. Show models
+1. Show graph
+1. Show resolver
+1. Fix resolver
+1. Run server `make run`
+1. Support getting list of channels
+1. Demo List channels
+1. Support list messages
+1. Demo messages of channels
+1. Copy implemented resolver
+1. Show Full query
+1. Show number of SQL Queries
+1. Do dataloader
+1. Show number of queries
